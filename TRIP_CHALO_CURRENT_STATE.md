@@ -171,6 +171,90 @@ standing "inspect before implementing" rule.
   as authoritative, `VERCEL_URL` as fallback, never the request `Origin`
   header — now confirmed working (signup/email confirmation PASSED).
 
+  ## Current Repository Structure
+
+> This is a structural reference, not a substitute for inspecting the actual
+> supplied source files. Update this section whenever the repository structure
+> changes materially.
+
+```text
+trip-chalo-phase1/
+├── CLAUDE.md
+├── TRIP_CHALO_MASTER.md
+├── TRIP_CHALO_CURRENT_STATE.md
+├── TRIP_CHALO_DECISION_LOG.md
+├── TRIP_CHALO_HANDOFF.md
+├── package.json
+├── next.config.ts
+├── tsconfig.json
+├── .env.example
+│
+├── src/
+│   ├── proxy.ts
+│   │
+│   ├── app/
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   │
+│   │   ├── (app)/
+│   │   │   ├── layout.tsx
+│   │   │   └── trips/
+│   │   │       └── page.tsx
+│   │   │
+│   │   ├── (auth)/
+│   │   │   ├── layout.tsx
+│   │   │   ├── login/
+│   │   │   │   └── page.tsx
+│   │   │   └── signup/
+│   │   │       └── page.tsx
+│   │   │
+│   │   └── auth/
+│   │       └── callback/
+│   │           └── route.ts
+│   │
+│   ├── lib/
+│   │   └── supabase/
+│   │       ├── client.ts
+│   │       ├── proxy.ts
+│   │       └── server.ts
+│   │
+│   └── modules/
+│       ├── auth/
+│       │   ├── actions.ts
+│       │   ├── validation.ts
+│       │   └── components/
+│       │       ├── LoginForm.tsx
+│       │       ├── SignOutButton.tsx
+│       │       └── SignupForm.tsx
+│       │
+│       ├── chat/
+│       │   └── .gitkeep
+│       ├── invitations/
+│       │   └── .gitkeep
+│       ├── media/
+│       │   └── .gitkeep
+│       ├── memberships/
+│       │   └── .gitkeep
+│       ├── storage/
+│       │   └── .gitkeep
+│       └── trips/
+│           └── .gitkeep
+│
+└── supabase/
+    ├── .gitignore
+    ├── config.toml
+    └── migrations/
+        ├── 0001_profiles.sql
+        ├── 0002_trips.sql
+        ├── 0003_trip_members.sql
+        ├── 0004_invitations.sql
+        ├── 0005_media.sql
+        ├── 0006_messages.sql
+        ├── 0007_rls_policies.sql
+        └── 0008_grants.sql
+
 ---
 
 ## What must happen before moving past Phase 4 into Phase 5
