@@ -197,6 +197,61 @@ login/logout/session/protected-routes/profile-integration). Flagged
 explicitly as a known gap rather than silently added or silently omitted.
 **Status:** FUTURE PLAN — no phase currently assigned.
 
+## Phase 4 — Trips / Trip Lifecycle
+
+**Status:** APPROVED / IN PROGRESS
+
+### Decisions
+
+- Phase 4 supports trip creation, listing, viewing, owner-only update, and owner-only hard deletion.
+- `owner_id` is derived from the authenticated user's server-verified `claims.sub`; it is never trusted from client input.
+- Existing trips RLS policies remain the authorization boundary.
+- No service-role bypass is required.
+- Migration 0009 was required and applied to resolve the Phase 4 INSERT ... RETURNING / SELECT-RLS interaction caused by the owner-membership trigger timing.
+- Trip deletion is owner-only and uses the existing database cascade behavior.
+- Deleting a trip cascades its `trip_members`, `invitations`, `media`, and `messages` rows.
+- Archive/soft-delete is deferred. No archive column or archive UI will be introduced in Phase 4.
+- Phase 5–8 functionality remains outside Phase 4.
+
+
+latestes changes
+UI/pages remain to be implemented.
+
+
+Phase 4 verified decision for 0009.
+
+
+Decision: trips SELECT policy explicitly permits the authenticated owner in addition to trip members.
+
+Why: Trip creation inserts the trip and immediately performs .select("id"). The owner-membership trigger is AFTER INSERT, so membership does not yet exist when the returned row is evaluated by the SELECT policy. Without the owner clause, creation fails with PostgreSQL 42501. Adding owner_id = auth.uid() preserves the intended authorization model and resolves the ordering interaction.
+
+Status: VERIFIED — migration 0009 applied to the live Supabase project and trip creation successfully tested.
+
+### Phase 4 implementation status
+
+Create trip ✅
+Owner-derived owner_id / creation flow ✅
+Redirect to detail ✅
+Trip list/detail ✅
+Owner edit ✅
+Owner delete ✅
+Delete confirmation ✅
+Empty state ✅
+Invalid date validation ✅
+Required name validation ✅
+Form values preserved after validation error ✅
+Nonexistent UUID → not-found ✅
+Malformed ID → not-found ✅
+Unauthenticated access blocked ✅
+Build ✅
+TypeScript ✅
+ESLint ✅
+Migration 0009 applied and remote/local synchronized ✅
+
+### Known future dependency
+
+When Phase 6 introduces Cloudflare R2 objects, trip deletion must account for deleting the corresponding R2 objects because PostgreSQL cascade deletion only removes media metadata.
+
 ---
 
 ## Not yet decided / open

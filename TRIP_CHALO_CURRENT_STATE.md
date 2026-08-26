@@ -20,33 +20,37 @@ At the start of a new session:
 
 ## Current phase
 
-**Phase 4 — Trips / Trip Lifecycle.**
-Phase 3 is complete and verified. Next step: an independent Phase 4
-repository/database/RLS review before any implementation begins.
+**Phase 4 — Trips / Trip Lifecycle**
 
----
+**Status: 🔄 IN PROGRESS**
 
-## Completed phases
+Phase 4 design/security review has been completed and approved.
+Implementation is underway.
 
-| Phase | Status | Basis |
-|---|---|---|
-| 0 — Product + Architecture | ✅ Decided | Established in the original master handoff prompt |
-| 1 — Application Foundation | ✅ VERIFIED by user | User stated "Phase 1 is complete and pushed to the correct GitHub repository" at the start of the Phase 2 request. Local path given: `D:\project\trip-chalo-phase1`. |
-| 2 — Database + Security Foundation | ✅ VERIFIED by user | User stated "Migrations 0001–0008 are restored and applied," "RLS enabled and verified on all six [tables]," "RLS policies and required functions verified" at the start of the Phase 3 request. |
-| 3 — Authentication + User Identity | ✅ COMPLETE AND VERIFIED | `npm run build` PASSED. Full manual test sequence PASSED: signup/email confirmation, login/logout, protected `/trips` route, auth-page redirects, open-redirect protection, profile creation/integration. Committed as `e5b39a8` — "Complete Phase 3 authentication". `git status --short` reported CLEAN. |
-| 4 — Trips / Trip Lifecycle | 🔄 Current phase, not yet started | Independent repository/database/RLS review is the agreed next step before implementation. |
-| 5–11 | Not started | — |
+### Phase 4 progress
+
+Batch 0 — Design/security review: ✅
+Batch 1 — Backend: ✅
+Batch 2 — UI/pages: ✅
+Batch 3 — Runtime/security verification: ✅
+Batch 4 — Documentation/final review: 🔄 CURRENT
 
 ---
 
 ## Current Git checkpoint
 
-- **Commit:** `e5b39a8`
-- **Message:** "Complete Phase 3 authentication"
-- **Working tree:** CLEAN (`git status --short` reported no output)
+- Last committed checkpoint: `e4ac8f8` — "Add project context and Claude workflow"
+- Phase 4 Batch 1 is currently uncommitted.
+- Working tree contains the three intended Phase 4 files:
+  - `src/modules/trips/validation.ts`
+  - `src/modules/trips/queries.ts`
+  - `src/modules/trips/actions.ts`
 
-This is the current stable checkpoint. Any Phase 4 work should branch
-forward from here.
+Batch 1 has passed:
+- `npm run build`
+- `npx tsc --noEmit`
+
+Do not treat Batch 1 as committed until final Phase 4 verification and explicit user approval.
 
 ---
 
@@ -130,18 +134,20 @@ deleted. No outstanding file-cleanup items remain from Phase 3.
 
 ---
 
+
+
 ## Current work / next step
 
-**Independent Phase 4 repository/database/RLS review, before any
-implementation.** This should re-inspect the actual current state of:
-- `trips` table RLS policies and grants (from migrations 0002 + 0007 + 0008)
-- Existing `trip_members` owner-auto-membership trigger behavior
-- Any Phase 3 auth/session code that Phase 4 pages will depend on
-  (`getClaims()`, the `(app)` layout's auth gate)
+Phase 4 Batch 1 is complete and approved.
 
-...before writing any trip-creation/listing/update code, per the project's
-standing "inspect before implementing" rule.
+Next:
+**Batch 2 — Trip UI / Pages**
 
+After Batch 2:
+- Batch 3 — full functional/security verification
+- Batch 4 — documentation update and final Git checkpoint
+
+Phase 4 must be fully verified before moving to Phase 5.
 ---
 
 ## Known gaps / issues
@@ -240,7 +246,12 @@ trip-chalo-phase1/
 │       ├── storage/
 │       │   └── .gitkeep
 │       └── trips/
-│           └── .gitkeep
+│            ├── validation.ts
+│            ├── queries.ts
+│            ├── actions.ts── trips/
+│            ├── .gitkeep
+│            
+│       
 │
 └── supabase/
     ├── .gitignore
@@ -253,7 +264,8 @@ trip-chalo-phase1/
         ├── 0005_media.sql
         ├── 0006_messages.sql
         ├── 0007_rls_policies.sql
-        └── 0008_grants.sql
+        ├── 0008_grants.sql
+        └── 0009_trips_select_owner.sql
 
 ---
 
