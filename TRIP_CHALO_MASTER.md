@@ -1,9 +1,12 @@
+# TRIP_CHALO_MASTER
+
 # TRIP CHALO — MASTER PROJECT KNOWLEDGE
 
 > This document is CONTEXT, not absolute truth. Before implementing anything,
-> inspect the actual repository (code, migrations, `package.json`, Git state).
-> Treat the repo as the source of truth over this document. If this document
-> and the repo disagree, flag the contradiction — do not silently pick one.
+inspect the actual repository (code, migrations, `package.json`, Git state).
+Treat the repo as the source of truth over this document. If this document
+and the repo disagree, flag the contradiction — do not silently pick one.
+> 
 
 ---
 
@@ -48,10 +51,10 @@ Media storage boundary (non-negotiable, stated repeatedly across phases):
 
 ## 3. Technology stack
 
-Confirmed from the user's actual environment during Phase 3 review:
+Confirmed from the user’s actual environment during Phase 3 review:
 
 | Layer | Choice | Verified version |
-|---|---|---|
+| --- | --- | --- |
 | Framework | Next.js, App Router, `src/` layout | 16.3.1 |
 | UI | React | 19.2.8 |
 | Language | TypeScript | 5.9.3 |
@@ -76,12 +79,12 @@ This is the full roadmap as originally defined. There is no Phase 12 — the
 roadmap runs Phase 0 through Phase 11.
 
 | Phase | Name | Scope |
-|---|---|---|
-| 0 | Product + Architecture | Product definition, stack selection, architecture decisions (this document's §1–3) |
+| --- | --- | --- |
+| 0 | Product + Architecture | Product definition, stack selection, architecture decisions (this document’s §1–3) |
 | 1 | Application Foundation | Next.js + TypeScript scaffold, project structure, Supabase client/server helper files |
 | 2 | Database + Security Foundation | Schema, migrations, RLS, grants, SECURITY DEFINER functions |
 | 3 | Authentication + User Identity | Signup/login/logout, session persistence, protected routes, profile integration |
-| 4 | Trips | Create/view/update/archive trips |
+| 4 | Trips | Create/view/update/hard-delete trips |
 | 5 | Membership & Invitations | Invitation UI wired to `accept/decline/revoke_invitation`, membership management UI |
 | 6 | Media | R2 integration, upload flow, metadata pipeline, chronology-based timeline UI |
 | 7 | Chat | Trip chat UI, Supabase Realtime wiring |
@@ -108,35 +111,36 @@ Stated once at project kickoff, still in force unless explicitly revisited:
 ## 6. Core security/engineering principles (apply to every phase)
 
 1. **RLS + explicit Data API grants are both required.** RLS restricts which
-   rows a role can touch; grants restrict whether the role can reach the
-   table at all. Neither substitutes for the other. `anon` gets no grants on
-   any private application table.
+rows a role can touch; grants restrict whether the role can reach the
+table at all. Neither substitutes for the other. `anon` gets no grants on
+any private application table.
 2. **Authorization is enforced at the database level**, never solely in
-   frontend/client code.
-3. **`trip_members` is the single source of truth** for "can this user see
-   this trip's data." Every other table's access policy ultimately reduces
-   to a membership check.
+frontend/client code.
+3. **`trip_members` is the single source of truth** for “can this user see
+this trip’s data.” Every other table’s access policy ultimately reduces
+to a membership check.
 4. **Never allow direct client-side membership insertion.** A user must not
-   be able to add themselves to an arbitrary trip. Membership rows are only
-   created by a trigger (trip creation → owner) or a controlled
-   `SECURITY DEFINER` function (invitation acceptance).
+be able to add themselves to an arbitrary trip. Membership rows are only
+created by a trigger (trip creation → owner) or a controlled
+`SECURITY DEFINER` function (invitation acceptance).
 5. **`SECURITY DEFINER` functions must set `search_path = ''`**, fully
-   qualify every table reference, and have `EXECUTE` explicitly
-   revoked-then-granted only to the roles that legitimately call them.
-6. **Never trust `getSession()` for server-side authorization.** For the
-   current application protection pattern, use `getClaims()` as established
-   in Phase 3. Use `getUser()` only when a fresh server-validated user record
-   is specifically required by the operation. Re-check current Supabase
-   guidance before making future authentication architecture changes.
+qualify every table reference, and have `EXECUTE` explicitly
+revoked-then-granted only to the roles that legitimately call them.
+6. **For server-side authorization, use the project's established trusted auth
+pattern rather than relying on an unvalidated session object.** The current
+application protection pattern uses `getClaims()` as established in Phase 3.
+Use `getUser()` only when a fresh server-validated user record is specifically
+required by the operation. Re-check current Supabase guidance before making
+future authentication architecture changes.
 7. **Never expose the Supabase service-role key or R2 secret key** to the
-   browser, or ask the user to paste them into a session.
+browser, or ask the user to paste them into a session.
 8. **Redirect targets from request input must be validated** as safe
-   internal paths before being used (open-redirect prevention).
+internal paths before being used (open-redirect prevention).
 9. **Capture time and upload time are distinct and must never overwrite each
-   other.** Chronology is a stated differentiating product feature, not an
-   incidental detail.
-10. **Build the smallest correct version first.** Don't add fields, roles,
-    or infrastructure "because it might be useful someday."
+other.** Chronology is a stated differentiating product feature, not an
+incidental detail.
+10. **Build the smallest correct version first.** Don’t add fields, roles,
+or infrastructure “because it might be useful someday.”
 
 ---
 
@@ -148,14 +152,28 @@ Stated once at project kickoff, still in force unless explicitly revisited:
 - Vercel for hosting
 - Modular monolith, module folders under `src/modules/`
 - Six core tables: `profiles`, `trips`, `trip_members`, `invitations`,
-  `media`, `messages` — see `TRIP_CHALO_DECISION_LOG.md` for the reasoning
-  behind each
+`media`, `messages` — see `TRIP_CHALO_DECISION_LOG.md` for the reasoning
+behind each
+- RLS + explicit Data API grants are the authorization boundary; normal
+application operations must not bypass RLS through service-role access
+- Server-side application protection uses the trusted Supabase auth context,
+currently `getClaims()` as established in Phase 3; future changes should be
+re-verified against current Supabase guidance
 - Email-targeted invitations (not user-ID-targeted), since the invitee may
-  not have an account yet
+not have an account yet
 - Owner membership row is currently **undeletable** — no ownership-transfer
-  mechanism exists yet; this is a known, intentional limitation, not an
-  oversight
+mechanism exists yet; this is a known, intentional limitation, not an
+oversight
 
-Any change to these should be flagged explicitly (what's changing, why,
+### Codebase Structural Analysis
+
+Trip Chalo may use Graphify as a supplementary codebase-structure and
+dependency-analysis tool.
+
+Graphify is not an architectural authority and does not replace repository
+inspection, database inspection, tests, or the project's persistent
+documentation.
+
+Any change to these should be flagged explicitly (what’s changing, why,
 alternatives considered, impact) before being implemented, per the
-project's original operating principle.
+project’s original operating principle.

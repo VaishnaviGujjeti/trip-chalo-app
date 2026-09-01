@@ -1,10 +1,12 @@
+# CLAUDE
+
 # Trip Chalo — Claude Project Instructions
 
 ## 1. Purpose
 
 You are working on **Trip Chalo**, a private shared-memory/travel application.
 
-This file is Claude's **operating manual**. Keep it concise. Do not turn it into a duplicate of the project's architecture, roadmap, or decision history.
+This file is Claude’s **operating manual**. Keep it concise. Do not turn it into a duplicate of the project’s architecture, roadmap, or decision history.
 
 **The actual repository is the ultimate source of truth.**
 
@@ -49,7 +51,7 @@ Before changing code:
 
 Never recreate a file from memory when the real file can be inspected.
 
-Never assume previously generated code is still the repository's current code.
+Never assume previously generated code is still the repository’s current code.
 
 ---
 
@@ -153,6 +155,20 @@ Do not create multiple overlapping memory documents.
 
 Never put secrets, API keys, passwords, tokens, or credentials into project memory files.
 
+## 9.1 Graphify Codebase Context
+
+Graphify is a generated structural map of the repository.
+
+- `graphify-out/graph.json` is generated structural data.
+- `graphify-out/wiki/` is generated, human/AI-readable code-relationship documentation.
+- Graphify is supplementary context, not the source of truth.
+- The actual repository/code/database remains authoritative.
+- Do not treat Graphify output as authoritative when it conflicts with the repository.
+- Graphify output may be stale after code changes; verify against the current repository.
+- Use Graphify to understand relationships, dependencies, affected areas, and architectural hubs.
+- Do not modify generated Graphify output manually.
+- Do not use Graphify's Claude Code integration unless Claude Code is explicitly being used.
+Claude.ai may use the generated Graphify documentation through the repository/GitHub integration, but Graphify itself is generated locally and is not assumed to be directly executable from Claude.ai.
 ---
 
 ## 10. Documentation Hygiene
@@ -160,7 +176,7 @@ Never put secrets, API keys, passwords, tokens, or credentials into project memo
 Keep the project documents distinct:
 
 | File | Purpose |
-|---|---|
+| --- | --- |
 | `CLAUDE.md` | How Claude should operate |
 | `TRIP_CHALO_MASTER.md` | Long-term WHAT |
 | `TRIP_CHALO_CURRENT_STATE.md` | Current WHERE |
@@ -190,39 +206,38 @@ If a requirement conflicts with an existing decision, surface the conflict befor
 
 ---
 
-## 12. Current Phase — Phase 4
+## 12. Current Phase — Phase 5
 
-The current phase is **Phase 4 — Trips / Trip Lifecycle**.
+The current phase is **Phase 5 — Membership & Invitations**.
 
 The first task is **review, not implementation**.
 
-Before writing Phase 4 code, inspect:
+Before writing Phase 5 code, inspect the actual repository and database,
+including the complete migration chain `0001`–`0009`, relevant RLS policies,
+grants, functions, triggers, foreign keys, cascade behavior, Phase 4
+authorization patterns, and the relevant application modules/routes.
 
-- the existing `trips` schema and constraints;
-- `trip_members` ownership and auto-membership behavior;
-- trips RLS policies and grants;
-- relevant Phase 3 authentication/session surfaces;
-- the current trips page and trips module;
-- the actual repository state.
+The Phase 5 starting scope is a hypothesis, not an approved implementation
+plan. Independently determine:
 
-Then independently propose/review:
+- membership lifecycle
+- invitation lifecycle
+- authorization boundaries
+- existing database capabilities that can be reused
+- whether any database change is genuinely necessary
+- affected files/modules/routes
+- validation and error behavior
+- positive and negative two-user security verification
+- implementation order and batch boundaries
+- explicit Phase 5 boundaries and later-phase dependencies
 
-- create
-- list
-- view
-- update
-- delete behavior based on the actual schema;
-- determine whether archive/soft-delete is actually required and supported;
-- authorization
-- validation
-- database changes, if any
-- affected files
-- tests/security verification
-- scope boundaries and future-phase dependencies
+Claude has freedom to challenge the proposed Phase 5 structure, scope,
+implementation approach, file organization, or batching when the actual
+repository/database supports a better, safer, simpler, or more maintainable
+solution.
 
-Do not assume an earlier proposed Phase 4 design is correct. Use it as context only, inspect the actual system, and apply sound engineering judgment.
-
-**Do not implement Phase 4 until the review/design is approved.**
+Do not implement until the Phase 5 review/design has been completed and
+explicit approval is given.
 
 ---
 
@@ -246,3 +261,11 @@ A phase is complete only when:
 **Inspect → reason → identify risks → propose → get approval when required → implement → verify → document → commit.**
 
 Do not trade correctness, security, or project continuity for speed.
+
+[TRIP_CHALO_HANDOFF](TRIP_CHALO_HANDOFF%203cc52de2850080658565ca7669a6206e.md)
+
+[TRIP_CHALO_MASTER](TRIP_CHALO_MASTER%203ce52de2850080588e29f7a7ee3c572e.md)
+
+[TRIP_CHALO_CURRENT_STATE](TRIP_CHALO_CURRENT_STATE%203cb52de2850080a8bc6bf88f2a384164.md)
+
+[TRIP_CHALO_DECISION_LOG](TRIP_CHALO_DECISION_LOG%203cc52de2850080fcb834c10c0cb6cfd9.md)

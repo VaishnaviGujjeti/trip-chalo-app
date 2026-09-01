@@ -1,0 +1,458 @@
+{
+  "communities": {
+    "0": [
+      "src_app_app_trips_new_page",
+      "src_app_app_trips_new_page_metadata",
+      "src_app_app_trips_new_page_newtrippage",
+      "src_app_app_trips_page",
+      "src_app_app_trips_page_metadata",
+      "src_app_app_trips_page_tripspage",
+      "src_app_app_trips_tripid_edit_page",
+      "src_app_app_trips_tripid_edit_page_edittrippage",
+      "src_app_app_trips_tripid_edit_page_metadata",
+      "src_app_app_trips_tripid_page",
+      "src_app_app_trips_tripid_page_tripdetailpage",
+      "src_modules_auth_session",
+      "src_modules_auth_session_getcurrentuserid",
+      "src_modules_trips_components_tripform",
+      "src_modules_trips_components_tripform_initialstate",
+      "src_modules_trips_components_tripform_tripform",
+      "src_modules_trips_components_tripform_tripformprops",
+      "src_modules_trips_format",
+      "src_modules_trips_format_formatcalendardate",
+      "src_modules_trips_format_formattripdaterange",
+      "src_modules_trips_queries",
+      "src_modules_trips_queries_gettripbyid",
+      "src_modules_trips_queries_listmytrips",
+      "src_modules_trips_queries_trip"
+    ],
+    "1": [
+      "src_app_auth_login_page",
+      "src_app_auth_login_page_loginpage",
+      "src_app_auth_signup_page",
+      "src_app_auth_signup_page_signuppage",
+      "src_modules_auth_actions",
+      "src_modules_auth_actions_authactionstate",
+      "src_modules_auth_actions_resolvesiteorigin",
+      "src_modules_auth_actions_signinaction",
+      "src_modules_auth_actions_signupaction",
+      "src_modules_auth_components_loginform",
+      "src_modules_auth_components_loginform_initialstate",
+      "src_modules_auth_components_loginform_loginform",
+      "src_modules_auth_components_signupform",
+      "src_modules_auth_components_signupform_initialstate",
+      "src_modules_auth_components_signupform_signupform",
+      "src_modules_auth_validation",
+      "src_modules_auth_validation_issaferedirectpath",
+      "src_modules_auth_validation_validatedisplayname",
+      "src_modules_auth_validation_validateemail",
+      "src_modules_auth_validation_validatepassword",
+      "src_modules_auth_validation_validationresult"
+    ],
+    "2": [
+      "src_modules_trips_actions",
+      "src_modules_trips_actions_createtripaction",
+      "src_modules_trips_actions_deletetripaction",
+      "src_modules_trips_actions_emptytonull",
+      "src_modules_trips_actions_logdatabaseerror",
+      "src_modules_trips_actions_readtripformvalues",
+      "src_modules_trips_actions_tripactionstate",
+      "src_modules_trips_actions_tripcolumnsfrom",
+      "src_modules_trips_actions_tripformvalues",
+      "src_modules_trips_actions_updatetripaction",
+      "src_modules_trips_actions_validatetripformvalues",
+      "src_modules_trips_components_deletetripbutton",
+      "src_modules_trips_components_deletetripbutton_deletetripbutton",
+      "src_modules_trips_components_deletetripbutton_initialstate",
+      "src_modules_trips_validation",
+      "src_modules_trips_validation_istripid",
+      "src_modules_trips_validation_parsestrictdate",
+      "src_modules_trips_validation_validatetripdates",
+      "src_modules_trips_validation_validatetripdescription",
+      "src_modules_trips_validation_validatetripname",
+      "src_modules_trips_validation_validationresult"
+    ],
+    "3": [
+      "next",
+      "package",
+      "package_dependencies",
+      "package_dependencies_next",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_supabase_ssr",
+      "package_dependencies_supabase_supabase_js",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_start",
+      "package_version",
+      "react",
+      "react_dom",
+      "supabase_ssr",
+      "supabase_supabase_js"
+    ],
+    "4": [
+      "ref_dom",
+      "ref_dom_iterable",
+      "ref_esnext",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_esmoduleinterop",
+      "tsconfig_compileroptions_incremental",
+      "tsconfig_compileroptions_isolatedmodules",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_paths",
+      "tsconfig_compileroptions_plugins",
+      "tsconfig_compileroptions_resolvejsonmodule",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict",
+      "tsconfig_compileroptions_target"
+    ],
+    "5": [
+      "eslint",
+      "eslint_config_next",
+      "package_devdependencies",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_config_next",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_postcss",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "tailwindcss",
+      "tailwindcss_postcss",
+      "types_node",
+      "types_react",
+      "types_react_dom",
+      "typescript"
+    ],
+    "6": [
+      "src_app_app_layout",
+      "src_app_app_layout_applayout",
+      "src_app_auth_callback_route",
+      "src_app_auth_callback_route_get",
+      "src_app_auth_layout",
+      "src_app_auth_layout_authlayout",
+      "src_app_page",
+      "src_app_page_home",
+      "src_lib_supabase_server",
+      "src_lib_supabase_server_createclient",
+      "src_modules_auth_actions_signoutaction",
+      "src_modules_auth_components_signoutbutton",
+      "src_modules_auth_components_signoutbutton_signoutbutton"
+    ],
+    "7": [
+      "ref_mts",
+      "ref_next_dev_types_ts",
+      "ref_next_env_d_ts",
+      "ref_next_types_ts",
+      "ref_node_modules",
+      "ref_ts",
+      "ref_tsx",
+      "tsconfig",
+      "tsconfig_exclude",
+      "tsconfig_include"
+    ],
+    "8": [
+      "auth_users",
+      "public_handle_new_user",
+      "supabase_migrations_0001_profiles",
+      "supabase_migrations_0001_profiles_on_auth_user_created",
+      "supabase_migrations_0001_profiles_profiles_set_updated_at",
+      "supabase_migrations_0001_profiles_public_handle_new_user",
+      "supabase_migrations_0001_profiles_public_profiles",
+      "supabase_migrations_0001_profiles_public_set_updated_at",
+      "supabase_migrations_0001_profiles_sql_public_set_updated_at"
+    ],
+    "9": [
+      "public_invitations",
+      "public_trip_members",
+      "supabase_migrations_0007_rls_policies",
+      "supabase_migrations_0007_rls_policies_public_accept_invitation",
+      "supabase_migrations_0007_rls_policies_public_decline_invitation",
+      "supabase_migrations_0007_rls_policies_public_is_trip_member",
+      "supabase_migrations_0007_rls_policies_public_is_trip_owner",
+      "supabase_migrations_0007_rls_policies_public_revoke_invitation",
+      "supabase_migrations_0007_rls_policies_sql_public_trips"
+    ],
+    "10": [
+      "public",
+      "public_add_trip_owner_as_member",
+      "supabase_migrations_0003_trip_members",
+      "supabase_migrations_0003_trip_members_on_trip_created",
+      "supabase_migrations_0003_trip_members_public_add_trip_owner_as_member",
+      "supabase_migrations_0003_trip_members_public_trip_members",
+      "supabase_migrations_0003_trip_members_sql_public_profiles",
+      "supabase_migrations_0003_trip_members_sql_public_trips"
+    ],
+    "11": [
+      "src_lib_supabase_proxy",
+      "src_lib_supabase_proxy_auth_prefixes",
+      "src_lib_supabase_proxy_protected_prefixes",
+      "src_lib_supabase_proxy_updatesession",
+      "src_proxy",
+      "src_proxy_config",
+      "src_proxy_proxy"
+    ],
+    "12": [
+      "src_app_layout",
+      "src_app_layout_geistmono",
+      "src_app_layout_geistsans",
+      "src_app_layout_metadata",
+      "src_app_layout_rootlayout"
+    ],
+    "13": [
+      "supabase_migrations_0002_trips",
+      "supabase_migrations_0002_trips_public_trips",
+      "supabase_migrations_0002_trips_sql_public_profiles",
+      "supabase_migrations_0002_trips_sql_public_set_updated_at",
+      "supabase_migrations_0002_trips_trips_set_updated_at"
+    ],
+    "14": [
+      "supabase_migrations_0004_invitations",
+      "supabase_migrations_0004_invitations_public_invitations",
+      "supabase_migrations_0004_invitations_sql_public_profiles",
+      "supabase_migrations_0004_invitations_sql_public_trips"
+    ],
+    "15": [
+      "supabase_migrations_0005_media",
+      "supabase_migrations_0005_media_public_media",
+      "supabase_migrations_0005_media_sql_public_profiles",
+      "supabase_migrations_0005_media_sql_public_trips"
+    ],
+    "16": [
+      "supabase_migrations_0006_messages",
+      "supabase_migrations_0006_messages_public_messages",
+      "supabase_migrations_0006_messages_sql_public_profiles",
+      "supabase_migrations_0006_messages_sql_public_trips"
+    ],
+    "17": [
+      "eslint_config",
+      "eslint_config_eslintconfig"
+    ],
+    "18": [
+      "next_config",
+      "next_config_nextconfig"
+    ],
+    "19": [
+      "postcss_config",
+      "postcss_config_config"
+    ],
+    "20": [
+      "src_app_app_trips_error",
+      "src_app_app_trips_error_tripserror"
+    ],
+    "21": [
+      "src_app_app_trips_loading",
+      "src_app_app_trips_loading_tripsloading"
+    ],
+    "22": [
+      "src_app_app_trips_tripid_not_found",
+      "src_app_app_trips_tripid_not_found_tripnotfound"
+    ],
+    "23": [
+      "src_lib_supabase_client",
+      "src_lib_supabase_client_createclient"
+    ],
+    "24": [
+      "public_media"
+    ],
+    "25": [
+      "public_messages"
+    ],
+    "26": [
+      "supabase_migrations_0007_rls_policies_sql_public_profiles"
+    ],
+    "27": [
+      "supabase_migrations_0008_grants"
+    ],
+    "28": [
+      "supabase_migrations_0009_trips_select_owner"
+    ]
+  },
+  "cohesion": {
+    "0": 0.15942028985507245,
+    "1": 0.19523809523809524,
+    "2": 0.20476190476190476,
+    "3": 0.1,
+    "4": 0.10526315789473684,
+    "5": 0.11764705882352941,
+    "6": 0.28205128205128205,
+    "7": 0.2,
+    "8": 0.2222222222222222,
+    "9": 0.2777777777777778,
+    "10": 0.25,
+    "11": 0.38095238095238093,
+    "12": 0.4,
+    "13": 0.4,
+    "14": 0.5,
+    "15": 0.5,
+    "16": 0.5,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_lib_supabase_server_createclient",
+      "label": "createClient()",
+      "degree": 22
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 16
+    },
+    {
+      "id": "src_modules_auth_session_getcurrentuserid",
+      "label": "getCurrentUserId()",
+      "degree": 8
+    },
+    {
+      "id": "src_modules_auth_actions_signupaction",
+      "label": "signUpAction()",
+      "degree": 8
+    },
+    {
+      "id": "src_modules_trips_actions_createtripaction",
+      "label": "createTripAction()",
+      "degree": 8
+    },
+    {
+      "id": "src_modules_trips_actions_updatetripaction",
+      "label": "updateTripAction()",
+      "degree": 8
+    },
+    {
+      "id": "src_modules_trips_queries_gettripbyid",
+      "label": "getTripById()",
+      "degree": 7
+    },
+    {
+      "id": "src_modules_auth_validation_issaferedirectpath",
+      "label": "isSafeRedirectPath()",
+      "degree": 7
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "degree": 7
+    },
+    {
+      "id": "src_modules_trips_format_formattripdaterange",
+      "label": "formatTripDateRange()",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "getCurrentUserId()",
+      "target": "createClient()",
+      "source_files": [
+        "src/modules/auth/session.ts",
+        "src/lib/supabase/server.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "createTripAction()",
+      "target": "getCurrentUserId()",
+      "source_files": [
+        "src/modules/trips/actions.ts",
+        "src/modules/auth/session.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "getTripById()",
+      "target": "createClient()",
+      "source_files": [
+        "src/modules/trips/queries.ts",
+        "src/lib/supabase/server.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "getTripById()",
+      "target": "isTripId()",
+      "source_files": [
+        "src/modules/trips/queries.ts",
+        "src/modules/trips/validation.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "listMyTrips()",
+      "target": "createClient()",
+      "source_files": [
+        "src/modules/trips/queries.ts",
+        "src/lib/supabase/server.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `createClient()` connect `Community 6` to `Community 0`, `Community 1`, `Community 2`?",
+      "why": "High betweenness centrality (0.060) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `devDependencies` connect `Community 5` to `Community 3`?",
+      "why": "High betweenness centrality (0.018) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `compilerOptions` connect `Community 4` to `Community 7`?",
+      "why": "High betweenness centrality (0.014) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `TripFormProps`, `ValidationResult`, `TripFormValues` to the rest of the system?",
+      "why": "64 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 3` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 4` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 5` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
