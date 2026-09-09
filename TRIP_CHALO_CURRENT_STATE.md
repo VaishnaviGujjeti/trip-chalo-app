@@ -13,10 +13,10 @@ At the start of a new session:
 
 # TRIP CHALO — CURRENT STATE
 
-> Snapshot as of the end of the Phase 3 verification conversation.
-This is CONTEXT, not fact. Before doing anything, verify against the real
-repository: `git log`, `git status`, `npm run build`, and the actual
-Supabase project — not this file.
+> Snapshot updated after Phase 5 implementation and live Supabase verification.
+This is CONTEXT, not a substitute for the repository or live database. Before
+consequential work, verify important claims against the actual repository, Git
+state, and Supabase project.
 > 
 
 ---
@@ -25,19 +25,20 @@ Supabase project — not this file.
 
 **Phase 5 — Membership & Invitations**
 
-**Status: design/security review pending**
+**Status: implementation and security verification complete; documentation/Git closure pending**
 
 ---
 
 ## Current Git checkpoint
 
-- **Commit:** `21532f0`
-- **Message:** `Complete Phase 4 trip lifecycle`
+- **Pre-verification checkpoint:** `858bd7d`
+- **Message:** `Complete Phase 5 membership and invitation implementation`
 - **Branch:** `main`
-- **Working tree:** CLEAN
 - **Remote:** `origin`
-- **Push:** completed successfully
-- **Current phase:** Phase 5 — Membership & Invitations
+- **Push:** completed successfully for `858bd7d`
+- **Checkpoint meaning:** implementation checkpoint before final live verification; not itself proof that Phase 5 was complete
+- **Current status:** Phase 5 implementation verified; final documentation/closure commit still required
+- **Working tree:** must be checked before the final closure commit; this document intentionally does not assume it is clean
 
 ---
 
@@ -80,7 +81,23 @@ confirmed firing correctly under real Phase 3 code, producing a matching
 
 ---
 
+### Phase 5
+
+- `npx tsc --noEmit` passed after the Phase 5 implementation
+- `npm run build` passed after the Phase 5 implementation
+- Supabase CLI linked to the hosted `trip-chalo` project
+- `npx supabase migration list --linked` initially showed remote migrations only through `0009`; migrations `0010` and `0011` were then applied successfully with `npx supabase db push`
+- Live SQL Editor Test 1 — invitation lifecycle: **PASS**
+- Live SQL Editor Test 2 — unrelated-user authorization: **PASS**
+- Live SQL Editor Test 3 — member invite + revoke authorization: **PASS**
+- Tests 1–3 were independent throwaway-fixture tests, each wrapped in `BEGIN`/`ROLLBACK`; they exercised the hosted Supabase database rather than a local PostgreSQL shim
+- Earlier isolated PostgreSQL verification also passed 26/26 assertions for migrations `0001`–`0011`, but that environment was a shimmed PostgreSQL harness and is supplementary evidence, not a substitute for live verification
+
 ## Current repository state
+
+The tree below records the relevant known project structure. Exact file state
+for unrelated files must still be confirmed from the repository/Git state before
+a closure commit.
 
 ```
 trip-chalo-phase1/
@@ -163,13 +180,18 @@ trip-chalo-phase1/
 │       │   └── .gitkeep
 │       │
 │       ├── invitations/
-│       │   └── .gitkeep
+│       │   ├── action.ts
+│       │   ├── queries.ts
+│       │   ├── validation.ts
+│       │   └── components/
 │       │
 │       ├── media/
 │       │   └── .gitkeep
 │       │
 │       ├── memberships/
-│       │   └── .gitkeep
+│       │   ├── action.ts
+│       │   ├── queries.ts
+│       │   └── components/
 │       │
 │       ├── storage/
 │       │   └── .gitkeep
@@ -207,7 +229,9 @@ trip-chalo-phase1/
         ├── 0006_messages.sql
         ├── 0007_rls_policies.sql
         ├── 0008_grants.sql
-        └── 0009_trips_select_owner.sql
+        ├── 0009_trips_select_owner.sql
+        ├── 0010_profile_and_invitation_visibility.sql
+        └── 0011_invitation_email_case_insensitivity.sql
 ```
 
 ## Confirmed architecture in active use
@@ -220,6 +244,11 @@ convention, not the deprecated `middleware.ts`)
 - Phase 4 trip routes are present under `src/app/(app)/trips/`
 - Migration `0009_trips_select_owner.sql` is present for the Phase 4
 trips SELECT-RLS correction
+- Phase 5 invitation/membership server actions and query/validation modules
+are present under `src/modules/invitations/` and `src/modules/memberships/`
+- Migrations `0010_profile_and_invitation_visibility.sql` and
+`0011_invitation_email_case_insensitivity.sql` are present and have been
+deployed to the linked hosted Supabase project
 
 Deleted (confirmed):
 
@@ -262,24 +291,27 @@ Do not assume the graph is current without checking its source commit.
 
 **Phase 5 — Membership & Invitations**
 
-Phase 4 is complete, verified, documented, committed, pushed, and closed.
+Phase 5 implementation is complete from an implementation and live security-verification perspective. The remaining work is project-control closure: reconcile the canonical documentation, verify the final Git diff/status, and create/push the final closure checkpoint.
 
-### Next
+### Verified Phase 5 implementation
 
-**Phase 5 design/security review**
+- Any current trip member may invite another person.
+- Invitation email is normalized to trimmed lowercase form at the application boundary and protected by database normalization/uniqueness behavior.
+- Pending invitees do not receive direct trip SELECT access merely because an invitation exists.
+- Pending invitees use the narrow `get_invited_trip_preview` SECURITY DEFINER RPC, exposing exactly `trip_id`, `name`, `start_date`, and `end_date`.
+- Invitation accept/decline/revoke status transitions are performed through SECURITY DEFINER functions; direct invitation UPDATE/DELETE access is not granted through the Data API.
+- Trip-member insertion is not directly granted; membership changes occur through the approved paths.
+- A non-owner member may leave; the owner cannot leave because ownership transfer is not currently implemented.
+- Profile visibility is restricted to the owner/self plus safe co-member visibility established by migration `0010`.
 
-The Phase 5 review must inspect the actual repository and database behavior
-before implementation.
+### Current closure gate
 
-The existing Phase 5 scope is a starting hypothesis, not an approved
-implementation architecture. Claude may challenge the proposed structure,
-scope, batching, or implementation approach when the actual repository or
-database supports a better solution.
+1. Replace/update `TRIP_CHALO_CURRENT_STATE.md`, `TRIP_CHALO_DECISION_LOG.md`, and `TRIP_CHALO_HANDOFF.md` so they reflect the verified Phase 5 state.
+2. Recheck the actual Git diff/status and ensure only intended documentation/closure changes remain.
+3. Create the final Phase 5 closure commit and push it.
+4. Treat that final commit as the new authoritative checkpoint.
 
-No Phase 5 implementation should begin until the review is complete and
-explicit approval is given.
-
----
+Phase 5 should not be reopened unless a concrete defect/regression is found or an explicit project decision changes its approved behavior.
 
 ## Important recent decisions (see `TRIP_CHALO_DECISION_LOG.md` for full detail)
 
@@ -301,22 +333,3 @@ correctly. The correction preserves owner-only access and does not widen
 access to non-owners — now confirmed working through runtime verification.
 
 ---
-
-## Phase 5 starting point
-
-Phase 4 is closed.
-
-Verified prerequisites completed:
-
-- Current State, Decision Log, and Handoff reconciled
-- No unresolved Phase 4 functional/security issues
-- Phase 4 committed and pushed to `origin/main`
-- Working tree clean
-
-### Next action
-
-Begin the independent Phase 5 repository/database/RLS/security review.
-
-No Phase 5 implementation should begin until the review and implementation
-plan have been presented and explicitly approved.
-

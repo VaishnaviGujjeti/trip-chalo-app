@@ -196,9 +196,11 @@ When verification status changes, update the status so future sessions do not mi
 Be precise and evidence-driven. Distinguish:
 
 - **VERIFIED** — directly observed/tested.
+- **SUPPORTED** — supported by inspected evidence, but not itself directly tested.
 - **INFERRED** — logically concluded but not directly tested.
 - **PROPOSED** — design suggestion not yet approved.
-- **UNKNOWN** — requires inspection/testing.
+- **UNKNOWN / UNCERTAIN** — requires inspection/testing or the evidence is insufficient.
+- **CONTRADICTED** — conflicts with verified evidence.
 
 Never claim to have run, inspected, or tested something you did not.
 
@@ -206,38 +208,48 @@ If a requirement conflicts with an existing decision, surface the conflict befor
 
 ---
 
-## 12. Current Phase — Phase 5
+## 12. Current-Phase Operating Rule
 
-The current phase is **Phase 5 — Membership & Invitations**.
+The current phase and its status must be determined from the **actual project
+state**, not merely from an old document heading or stale status statement.
 
-The first task is **review, not implementation**.
+At the beginning of consequential work:
 
-Before writing Phase 5 code, inspect the actual repository and database,
-including the complete migration chain `0001`–`0009`, relevant RLS policies,
-grants, functions, triggers, foreign keys, cascade behavior, Phase 4
-authorization patterns, and the relevant application modules/routes.
+1. Verify the actual repository and Git state.
+2. Read the relevant Current State, Decision Log, Master, and Handoff material.
+3. Inspect the actual implementation and database when relevant.
+4. Determine whether the work is in design, implementation, verification,
+   closure, or already complete.
+5. Respect any explicit approval gate required for that phase.
+6. Do not restart completed work merely because stale documentation describes
+   it as unfinished.
 
-The Phase 5 starting scope is a hypothesis, not an approved implementation
-plan. Independently determine:
+For database/security work, verify the relevant:
 
-- membership lifecycle
-- invitation lifecycle
-- authorization boundaries
-- existing database capabilities that can be reused
-- whether any database change is genuinely necessary
-- affected files/modules/routes
-- validation and error behavior
-- positive and negative two-user security verification
-- implementation order and batch boundaries
-- explicit Phase 5 boundaries and later-phase dependencies
+- schema and migration history
+- constraints, indexes, triggers, and functions
+- RLS policies and grants
+- SECURITY DEFINER authorization boundaries
+- positive authorization cases
+- negative/unauthorized cases
 
-Claude has freedom to challenge the proposed Phase 5 structure, scope,
-implementation approach, file organization, or batching when the actual
-repository/database supports a better, safer, simpler, or more maintainable
-solution.
+When verification produces a failure, first determine whether the problem is:
 
-Do not implement until the Phase 5 review/design has been completed and
-explicit approval is given.
+- the system under test;
+- the verification/test itself;
+- the environment; or
+- insufficient evidence.
+
+Do not silently classify a test-harness or environment failure as an
+application or database defect.
+
+Once a phase is actually verified and closed:
+
+- preserve its established security properties;
+- do not reopen it without a concrete defect, regression, or explicit
+  instruction; and
+- use current project state and Git evidence to establish what was actually
+  completed.
 
 ---
 
